@@ -4,9 +4,7 @@ import com.devopsbuddy.web.domain.frontend.FeedbackPojo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 
-/**
- * Created by tedonema on 22/03/2016.
- */
+
 public abstract class AbstractEmailService implements EmailService {
 
     @Value("${default.to.address}")
