@@ -1,6 +1,6 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
 
-//import com.devopsbuddy.enums.RolesEnum;
+import com.devopsbuddy.enums.RolesEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,14 +26,14 @@ public class Role implements Serializable {
 
     }
 
-//    /**
-//     * Full constructor.
-//     * @param rolesEnum
-//     */
-//    public Role(RolesEnum rolesEnum) {
-//        this.id = rolesEnum.getId();
-//        this.name = rolesEnum.getRoleName();
-//    }
+    /**
+     * Full constructor.
+     * @param rolesEnum
+     */
+    public Role(RolesEnum rolesEnum) {
+        this.id = rolesEnum.getId();
+        this.name = rolesEnum.getRoleName();
+    }
 
     public int getId() {
         return id;
@@ -50,14 +50,14 @@ public class Role implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-//
-//    public Set<UserRole> getUserRoles() {
-//        return userRoles;
-//    }
-//
-//    public void setUserRoles(Set<UserRole> userRoles) {
-//        this.userRoles = userRoles;
-//    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
 
     @Override
     public boolean equals(Object o) {

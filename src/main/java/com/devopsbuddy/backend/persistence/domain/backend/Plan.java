@@ -1,10 +1,10 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
-
-//import com.devopsbuddy.enums.PlansEnum;
+import com.devopsbuddy.enums.PlansEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
+
 
 @Entity
 public class Plan implements Serializable {
@@ -22,10 +22,10 @@ public class Plan implements Serializable {
 
     }
 
-//    public Plan(PlansEnum plansEnum) {
-//        this.id = plansEnum.getId();
-//        this.name = plansEnum.getPlanName();
-//    }
+    public Plan(PlansEnum plansEnum) {
+        this.id = plansEnum.getId();
+        this.name = plansEnum.getPlanName();
+    }
 
     public int getId() {
         return id;

@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
-/**
- * Created by tedonema on 07/03/2016.
- */
+
 @Service
 public class I18NService {
 
