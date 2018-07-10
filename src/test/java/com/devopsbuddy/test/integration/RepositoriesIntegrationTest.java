@@ -13,7 +13,9 @@ import com.devopsbuddy.enums.RolesEnum;
 import com.devopsbuddy.utils.UsersUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -38,7 +40,8 @@ public class RepositoriesIntegrationTest {
     private UserRepository userRepository;
 
 
-
+    @Rule
+    public TestName testName = new TestName();
 
     @Before
     public void init() {
@@ -104,7 +107,10 @@ public class RepositoriesIntegrationTest {
         Plan basicPlan = createPlan(PlansEnum.BASIC);
         planRepository.save(basicPlan);
 
-        User basicUser = UsersUtils.createBasicUser();
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + "@gmail.com";
+
+        User basicUser = UsersUtils.createBasicUser(username, email);
         basicUser.setPlan(basicPlan);
 
         Role basicRole = createRole(RolesEnum.BASIC);
