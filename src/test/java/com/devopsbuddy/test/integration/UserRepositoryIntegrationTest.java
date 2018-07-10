@@ -23,25 +23,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DevopsbuddyApplication.class)
-public class RepositoriesIntegrationTest {
+public class UserRepositoryIntegrationTest extends AbstractIntegrationTest {
 
 
-    @Autowired
-    private PlanRepository planRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
+    @Rule public TestName testName = new TestName();
 
-    @Autowired
-    private UserRepository userRepository;
-
-
-    @Rule
-    public TestName testName = new TestName();
 
     @Before
     public void init() {
@@ -49,7 +40,6 @@ public class RepositoriesIntegrationTest {
         Assert.assertNotNull(roleRepository);
         Assert.assertNotNull(userRepository);
     }
-
 
     @Test
     public void testCreateNewPlan() throws Exception {
@@ -72,7 +62,10 @@ public class RepositoriesIntegrationTest {
     @Test
     public void createNewUser() throws Exception {
 
-        User basicUser = createUser();
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + "@gmail.com";
+
+        User basicUser = createUser(username, email);
 
         User newlyCreatedUser = userRepository.findOne(basicUser.getId());
         Assert.assertNotNull(newlyCreatedUser);
@@ -89,40 +82,36 @@ public class RepositoriesIntegrationTest {
 
     @Test
     public void testDeleteUser() throws Exception {
-        User basicUser = createUser();
-        userRepository.delete(basicUser.getId());
-    }
-
-    //-----------------> Private methods
-
-    private Plan createPlan(PlansEnum plansEnum) {
-        return new Plan(plansEnum);
-    }
-
-    private Role createRole(RolesEnum rolesEnum) {
-        return new Role(rolesEnum);
-    }
-
-    private User createUser() {
-        Plan basicPlan = createPlan(PlansEnum.BASIC);
-        planRepository.save(basicPlan);
 
         String username = testName.getMethodName();
         String email = testName.getMethodName() + "@gmail.com";
 
-        User basicUser = UsersUtils.createBasicUser(username, email);
-        basicUser.setPlan(basicPlan);
-
-        Role basicRole = createRole(RolesEnum.BASIC);
-        roleRepository.save(basicRole);
-
-        Set<UserRole> userRoles = new HashSet<>();
-        UserRole userRole = new UserRole(basicUser, basicRole);
-        userRoles.add(userRole);
-
-        basicUser.getUserRoles().addAll(userRoles);
-        basicUser = userRepository.save(basicUser);
-        return basicUser;
+        User basicUser = createUser(username, email);
+        userRepository.delete(basicUser.getId());
     }
+
+    @Test
+    public void testGetUserByEmail() throws Exception {
+        User user = createUser(testName);
+
+        User newlyFoundUser = userRepository.findByEmail(user.getEmail());
+        Assert.assertNotNull(newlyFoundUser);
+        Assert.assertNotNull(newlyFoundUser.getId());
+    }
+
+//    @Test
+//    public void testUpdateUserPassword() throws Exception {
+//        User user = createUser(testName);
+//        Assert.assertNotNull(user);
+//        Assert.assertNotNull(user.getId());
+//
+//        String newPassword = UUID.randomUUID().toString();
+//
+//        userRepository.updateUserPassword(user.getId(), newPassword);
+//
+//        user = userRepository.findOne(user.getId());
+//        Assert.assertEquals(newPassword, user.getPassword());
+//
+//    }
 
 }
