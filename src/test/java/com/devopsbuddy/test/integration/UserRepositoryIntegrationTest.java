@@ -99,19 +99,17 @@ public class UserRepositoryIntegrationTest extends AbstractIntegrationTest {
         Assert.assertNotNull(newlyFoundUser.getId());
     }
 
-//    @Test
-//    public void testUpdateUserPassword() throws Exception {
-//        User user = createUser(testName);
-//        Assert.assertNotNull(user);
-//        Assert.assertNotNull(user.getId());
-//
-//        String newPassword = UUID.randomUUID().toString();
-//
-//        userRepository.updateUserPassword(user.getId(), newPassword);
-//
-//        user = userRepository.findOne(user.getId());
-//        Assert.assertEquals(newPassword, user.getPassword());
-//
-//    }
+    @Test
+    public void testUpdateUserPassword() throws Exception {
+        User user = createUser(testName);
+
+        Assert.assertNotNull(user);
+        Assert.assertNotNull(user.getId());
+        String newPassword = UUID.randomUUID().toString();
+        userRepository.updateUserPassword(user.getId(), newPassword);
+        user = userRepository.findOne(user.getId());
+        Assert.assertEquals(newPassword, user.getPassword());
+
+    }
 
 }
