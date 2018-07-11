@@ -1,0 +1,12 @@
+1. install aws cli for windows
+2. On Command prompt type
+   aws configure --profile devopsbuddy
+   enter access key
+   enter secret access key
+   enter region - ap-south-1
+   leave format default
+ 3. .aws folder will be created under USER_HOME, containing
+    config
+    credntials
+ 4. Check aws cli by executing following command on the prompt
+    aws s3 ls --profile devopsbuddy
