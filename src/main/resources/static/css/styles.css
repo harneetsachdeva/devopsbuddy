@@ -57,3 +57,10 @@ body {
     letter-spacing: -1px;
 }
 
+/*-------------------------------------------------------
+ *  Signup form
+ *-------------------------------------------------------/
+ /** Registration page */
+.fieldError {
+    border : 2px solid red;
+}
