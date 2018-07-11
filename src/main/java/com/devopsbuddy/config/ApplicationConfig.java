@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @PropertySource("file:///${user.home}/.devopsbuddy/application-common.properties")
 public class ApplicationConfig {
+
     @Value("${aws.s3.profile}")
     private String awsProfileName;
 
